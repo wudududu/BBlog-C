@@ -1599,9 +1599,9 @@ window.markdownFromText = function ($data, $desc) {
   prettyPrint()
 
   // Style tables
-  // var tableEls = document.getElementsByTagName('table')
-  // for (var i = 0, ii = tableEls.length; i < ii; i++) {
-  //   var tableEl = tableEls[i]
-  //   tableEl.className = 'table table-striped table-bordered'
-  // }
+  var tableEls = document.getElementsByTagName('table')
+  for (var j = 0, jj = tableEls.length; j < jj; j++) {
+    var tableEl = tableEls[j]
+    tableEl.className = 'table table-striped table-bordered'
+  }
 }

@@ -1,29 +1,45 @@
 <template>
   <div>
-    <div v-for="item in lists" :key="item.title" class="content-list-box">
-      <h1>{{ item.title }}</h1>
-      <span>{{ item.time }}</span>
-      <ul>
-        <li v-for="kid in item.skeleton" :key="kid"><h3>{{ kid }}</h3></li>
+    <div v-for="item in lists" :key="item.title" :data-article="item._id" class="content-list-box" @click="gotoArticle($event)">
+      <h2 :data-article="item._id">{{ item.title }}</h2>
+      <span :data-article="item._id">{{ item.time }}</span>
+      <ul :data-article="item._id">
+        <li v-for="kid in item.skeleton" :key="kid" :data-article="item._id"><span>{{ kid }}</span></li>
       </ul>
     </div>
   </div>
 </template>
 
 <script>
+import {getArticleList} from '../utils/request.js'
 export default {
   name: 'local',
+  created() {
+    // 拉取文章列表
+    getArticleList({page: 1, limit: 2}).then(res => {
+      const re = /^(#{2})\s(.*)$/
+      let arr = [] // 保存2、3级标题内容
+      res.data.forEach(i => {
+        let tt = new Date(i.time)
+        i.time = tt.getFullYear() + '/' + tt.getMonth() + '/' + tt.getDate() + '  ' + tt.getHours() + ':' + tt.getMinutes() + ':' + tt.getSeconds()
+        i.skeleton.forEach(j => {
+          if (re.exec(j)) arr.push(re.exec(j)[2])
+        })
+        i.skeleton = arr
+      })
+      this.lists = res.data
+    })
+  },
+  methods: {
+    // 转到文章详情
+    gotoArticle(e) {
+      console.log(e.target.getAttribute('data-article'))
+      this.$router.push('/content/' + e.target.getAttribute('data-article'))
+    }
+  },
   data() {
     return {
-      lists: [{
-        title: 'ajflkajf',
-        skeleton: ['first', 'second', 'third'],
-        time: '2018-12-28'
-      }, {
-        title: '你好志华',
-        skeleton: ['放假阿卡丽', '法法', '耳短发'],
-        time: '2018-12-28'
-      }]
+      lists: []
     }
   }
 }
