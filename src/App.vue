@@ -15,7 +15,7 @@ body {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
-  word-break: normal
+  word-break: normal;
 }
 ul li {
   list-style: none

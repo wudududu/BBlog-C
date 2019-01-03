@@ -34,7 +34,6 @@ export default {
   margin-top: 20px;
   padding: 20px;
   text-align: center;
-  width: 100%
 }
 @media screen and (min-width: 800px) {
   #child-box {

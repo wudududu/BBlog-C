@@ -1583,12 +1583,12 @@ var prettyPrint;
 })()
 window.markdownFromText = function ($data, $desc) {
   // Generate Markdown
-  var html = ''
-  for (let i = 0; i < $data.length; i++) {
-    html += window.marked($data[i])
-  }
-  document.getElementById($desc).innerHTML = html
+  // var html = ''
+  // for (let i = 0; i < $data.length; i++) {
+  //   html += window.marked($data[i])
+  // }
 
+  document.getElementById($desc).innerHTML = window.marked($data)
   // Prettify
   var codeEls = document.getElementsByTagName('code')
   for (var i = 0, ii = codeEls.length; i < ii; i++) {
