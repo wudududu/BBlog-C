@@ -2,6 +2,7 @@
   <div>
     <div id="header">
       <span>BBlog</span>
+      <el-button @click="login">登录</el-button>
     </div>
     <div id="parent-box">
       <div id="child-box">
@@ -20,6 +21,11 @@ export default {
   data() {
     return {
 
+    }
+  },
+  methods: {
+    login() {
+      this.$router.push('/login')
     }
   }
 }

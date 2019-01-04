@@ -10,8 +10,9 @@ export default new Router({
       path: '/',
       name: 'layout',
       component: layout,
+      redirect: '/local',
       children: [{
-        path: '/',
+        path: '/local',
         name: 'local',
         component: () => import('../components/main.vue')
       }, {
@@ -19,6 +20,11 @@ export default new Router({
         name: 'content',
         component: () => import('../components/content.vue')
       }]
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('../components/login.vue')
     }
   ]
 })
